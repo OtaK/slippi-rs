@@ -1,0 +1,26 @@
+[package]
+name = "slippi-rs"
+description = "Rust port of the slippi-js library"
+documentation = "https://docs.rs/slippi-rs"
+homepage = "https://github.com/OtaK/slippi-rs"
+include = [
+    "**/*.rs",
+    "Cargo.toml",
+]
+keywords = [
+    "slippi",
+    "slp",
+]
+license = "MIT/Apache-2.0"
+repository = "https://github.com/OtaK/slippi-rs"
+version = "0.1.0"
+authors = ["Mathieu Amiot <amiot.mathieu@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+strum = { version = "0.19", features = ["derive"] }
+thiserror = "1.0"
+anyhow = "1.0"
+
+[dev-dependencies]
+criterion = "0.3"
