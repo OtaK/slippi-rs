@@ -18,9 +18,14 @@ authors = ["Mathieu Amiot <amiot.mathieu@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-strum = { version = "0.19", features = ["derive"] }
+strum = { version = "0.20", features = ["derive"] }
 thiserror = "1.0"
 anyhow = "1.0"
+enet = { version = "0.2", optional = true }
+
+[features]
+default = []
+console = ["enet"]
 
 [dev-dependencies]
 criterion = "0.3"
