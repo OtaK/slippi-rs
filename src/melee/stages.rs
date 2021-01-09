@@ -1,145 +1,174 @@
+#[derive(Debug, Clone, Copy, PartialEq, Eq, strum::EnumString, strum::Display)]
+#[repr(u8)]
+#[strum(serialize_all = "SCREAMING_SNAKE_CASE")]
+pub enum Stage {
+    FountainOfDreams = 2,
+    PokemonStadium = 3,
+    PeachsCastle = 4,
+    KongoJungle = 5,
+    Brinstar = 6,
+    Corneria = 7,
+    YoshisStory = 8,
+    Onett = 9,
+    MuteCity = 10,
+    RainbowCruise = 11,
+    JungleJapes = 12,
+    GreatBay = 13,
+    HyruleTemple = 14,
+    BrinstarDepths = 15,
+    YoshisIsland = 16,
+    GreenGreens = 17,
+    Fourside = 18,
+    MushroomKingdom = 19,
+    MushroomKingdom2 = 20,
+    Venom = 22,
+    PokeFloats = 23,
+    BigBlue = 24,
+    IcicleMountain = 25,
+    Icetop = 26,
+    FlatZone = 27,
+    Dreamland = 28,
+    YoshisIslandN64 = 29,
+    KongoJungleN64 = 30,
+    Battlefield = 31,
+    FinalDestination = 32,
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub struct Stage {
-    id: u8,
+pub struct StageInfo {
+    id: Stage,
     name: &'static str,
 }
 
-impl Stage {
+impl StageInfo {
     pub fn from_stage_id(stage_id: u8) -> crate::SlippiResult<Self> {
         STAGES
             .iter()
-            .find(|s| s.id == stage_id)
+            .find(|s| s.id as u8 == stage_id)
             .map(|s| *s)
             .ok_or_else(|| crate::SlippiError::UnknownStage(stage_id))
     }
 }
 
-pub const STAGES: [Stage; 30] = [
-    Stage {
-        id: 2,
+pub const STAGES: [StageInfo; 30] = [
+    StageInfo {
+        id: Stage::FountainOfDreams,
         name: "Fountain of Dreams",
     },
-    Stage {
-        id: 3,
+    StageInfo {
+        id: Stage::PokemonStadium,
         name: "Pokémon Stadium",
     },
-    Stage {
-        id: 4,
+    StageInfo {
+        id: Stage::PeachsCastle,
         name: "Princess Peach's Castle",
     },
-    Stage {
-        id: 5,
+    StageInfo {
+        id: Stage::KongoJungle,
         name: "Kongo Jungle",
     },
-    Stage {
-        id: 6,
+    StageInfo {
+        id: Stage::Brinstar,
         name: "Brinstar",
     },
-    Stage {
-        id: 7,
+    StageInfo {
+        id: Stage::Corneria,
         name: "Corneria",
     },
-    Stage {
-        id: 8,
+    StageInfo {
+        id: Stage::YoshisStory,
         name: "Yoshi's Story",
     },
-    Stage {
-        id: 9,
+    StageInfo {
+        id: Stage::Onett,
         name: "Onett",
     },
-    Stage {
-        id: 10,
+    StageInfo {
+        id: Stage::MuteCity,
         name: "Mute City",
     },
-    Stage {
-        id: 11,
+    StageInfo {
+        id: Stage::RainbowCruise,
         name: "Rainbow Cruise",
     },
-    Stage {
-        id: 12,
+    StageInfo {
+        id: Stage::JungleJapes,
         name: "Jungle Japes",
     },
-    Stage {
-        id: 13,
+    StageInfo {
+        id: Stage::GreatBay,
         name: "Great Bay",
     },
-    Stage {
-        id: 14,
+    StageInfo {
+        id: Stage::HyruleTemple,
         name: "Hyrule Temple",
     },
-    Stage {
-        id: 15,
+    StageInfo {
+        id: Stage::BrinstarDepths,
         name: "Brinstar Depths",
     },
-    Stage {
-        id: 16,
+    StageInfo {
+        id: Stage::YoshisIsland,
         name: "Yoshi's Island",
     },
-    Stage {
-        id: 17,
+    StageInfo {
+        id: Stage::GreenGreens,
         name: "Green Greens",
     },
-    Stage {
-        id: 18,
+    StageInfo {
+        id: Stage::Fourside,
         name: "Fourside",
     },
-    Stage {
-        id: 19,
+    StageInfo {
+        id: Stage::MushroomKingdom,
         name: "Mushroom Kingdom I",
     },
-    Stage {
-        id: 20,
+    StageInfo {
+        id: Stage::MushroomKingdom2,
         name: "Mushroom Kingdom II",
     },
-    Stage {
-        id: 22,
+    StageInfo {
+        id: Stage::Venom,
         name: "Venom",
     },
-    Stage {
-        id: 23,
+    StageInfo {
+        id: Stage::PokeFloats,
         name: "Poké Floats",
     },
-    Stage {
-        id: 24,
+    StageInfo {
+        id: Stage::BigBlue,
         name: "Big Blue",
     },
-    Stage {
-        id: 25,
+    StageInfo {
+        id: Stage::IcicleMountain,
         name: "Icicle Mountain",
     },
-    Stage {
-        id: 26,
+    StageInfo {
+        id: Stage::Icetop,
         name: "Icetop",
     },
-    Stage {
-        id: 27,
+    StageInfo {
+        id: Stage::FlatZone,
         name: "Flat Zone",
     },
-    Stage {
-        id: 28,
+    StageInfo {
+        id: Stage::Dreamland,
         name: "Dream Land N64",
     },
-    Stage {
-        id: 29,
+    StageInfo {
+        id: Stage::YoshisIslandN64,
         name: "Yoshi's Island N64",
     },
-    Stage {
-        id: 30,
+    StageInfo {
+        id: Stage::KongoJungleN64,
         name: "Kongo Jungle N64",
     },
-    Stage {
-        id: 31,
+    StageInfo {
+        id: Stage::Battlefield,
         name: "Battlefield",
     },
-    Stage {
-        id: 32,
+    StageInfo {
+        id: Stage::FinalDestination,
         name: "Final Destination",
     },
 ];
-
-pub const STAGE_FOD: u8 = 2;
-pub const STAGE_POKEMON: u8 = 3;
-pub const STAGE_YOSHIS: u8 = 8;
-pub const STAGE_DREAM_LAND: u8 = 28;
-pub const STAGE_BATTLEFIELD: u8 = 31;
-pub const STAGE_FD: u8 = 32;

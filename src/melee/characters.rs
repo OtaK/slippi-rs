@@ -1,3 +1,35 @@
+#[derive(Debug, Clone, Copy, PartialEq, Eq, strum::EnumString, strum::Display)]
+#[repr(u8)]
+#[strum(serialize_all = "SCREAMING_SNAKE_CASE")]
+pub enum Character {
+    CaptainFalcon = 0,
+    DonkeyKong = 1,
+    Fox = 2,
+    GameAndWatch = 3,
+    Kirby = 4,
+    Bowser = 5,
+    Link = 6,
+    Luigi = 7,
+    Mario = 8,
+    Marth = 9,
+    Mewtwo = 10,
+    Ness = 11,
+    Peach = 12,
+    Pikachu = 13,
+    IceClimbers = 14,
+    Jigglypuff = 15,
+    Samus = 16,
+    Yoshi = 17,
+    Zelda = 18,
+    Sheik = 19,
+    Falco = 20,
+    YoungLink = 21,
+    DrMario = 22,
+    Roy = 23,
+    Pichu = 24,
+    Ganondorf = 25,
+  }
+
 #[derive(Debug, Clone, PartialEq, Eq, strum::EnumString, strum::Display)]
 #[strum(serialize_all = "title_case")]
 pub enum CharacterColor {
@@ -21,7 +53,7 @@ pub enum CharacterColor {
 
 #[derive(Debug, Clone, Copy)]
 pub struct CharacterInfo {
-    id: u8,
+    id: Character,
     name: &'static str,
     short_name: &'static str,
     colors: &'static [CharacterColor],
@@ -31,7 +63,7 @@ impl CharacterInfo {
     pub fn from_character_id(id: u8) -> crate::SlippiResult<Self> {
         EXTERNAL_CHARACTERS
             .iter()
-            .find(|c| c.id == id)
+            .find(|c| c.id as u8 == id)
             .map(Clone::clone)
             .ok_or_else(|| crate::SlippiError::UnknownCharacter(id))
     }
@@ -39,7 +71,7 @@ impl CharacterInfo {
 
 pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
     CharacterInfo {
-        id: 0,
+        id: Character::CaptainFalcon,
         name: "Captain Falcon",
         short_name: "Falcon",
         colors: &[
@@ -52,7 +84,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 1,
+        id: Character::DonkeyKong,
         name: "Donkey Kong",
         short_name: "DK",
         colors: &[
@@ -64,7 +96,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 2,
+        id: Character::Fox,
         name: "Fox",
         short_name: "Fox",
         colors: &[
@@ -75,7 +107,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 3,
+        id: Character::GameAndWatch,
         name: "Mr. Game & Watch",
         short_name: "G&W",
         colors: &[
@@ -86,7 +118,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 4,
+        id: Character::Kirby,
         name: "Kirby",
         short_name: "Kirby",
         colors: &[
@@ -99,7 +131,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 5,
+        id: Character::Bowser,
         name: "Bowser",
         short_name: "Bowser",
         colors: &[
@@ -110,7 +142,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 6,
+        id: Character::Link,
         name: "Link",
         short_name: "Link",
         colors: &[
@@ -122,7 +154,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 7,
+        id: Character::Luigi,
         name: "Luigi",
         short_name: "Luigi",
         colors: &[
@@ -133,7 +165,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 8,
+        id: Character::Mario,
         name: "Mario",
         short_name: "Mario",
         colors: &[
@@ -145,7 +177,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 9,
+        id: Character::Marth,
         name: "Marth",
         short_name: "Marth",
         colors: &[
@@ -157,7 +189,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 10,
+        id: Character::Mewtwo,
         name: "Mewtwo",
         short_name: "Mewtwo",
         colors: &[
@@ -168,7 +200,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 11,
+        id: Character::Ness,
         name: "Ness",
         short_name: "Ness",
         colors: &[
@@ -179,7 +211,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 12,
+        id: Character::Peach,
         name: "Peach",
         short_name: "Peach",
         colors: &[
@@ -191,7 +223,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 13,
+        id: Character::Pikachu,
         name: "Pikachu",
         short_name: "Pikachu",
         colors: &[
@@ -202,7 +234,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 14,
+        id: Character::IceClimbers,
         name: "Ice Climbers",
         short_name: "ICs",
         colors: &[
@@ -213,7 +245,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 15,
+        id: Character::Jigglypuff,
         name: "Jigglypuff",
         short_name: "Puff",
         colors: &[
@@ -225,7 +257,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 16,
+        id: Character::Samus,
         name: "Samus",
         short_name: "Samus",
         colors: &[
@@ -237,7 +269,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 17,
+        id: Character::Yoshi,
         name: "Yoshi",
         short_name: "Yoshi",
         colors: &[
@@ -250,7 +282,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 18,
+        id: Character::Zelda,
         name: "Zelda",
         short_name: "Zelda",
         colors: &[
@@ -262,7 +294,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 19,
+        id: Character::Sheik,
         name: "Sheik",
         short_name: "Sheik",
         colors: &[
@@ -274,7 +306,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 20,
+        id: Character::Falco,
         name: "Falco",
         short_name: "Falco",
         colors: &[
@@ -285,7 +317,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 21,
+        id: Character::YoungLink,
         name: "Young Link",
         short_name: "YLink",
         colors: &[
@@ -297,7 +329,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 22,
+        id: Character::DrMario,
         name: "Dr. Mario",
         short_name: "Doc",
         colors: &[
@@ -309,7 +341,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 23,
+        id: Character::Roy,
         name: "Roy",
         short_name: "Roy",
         colors: &[
@@ -321,7 +353,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 24,
+        id: Character::Pichu,
         name: "Pichu",
         short_name: "Pichu",
         colors: &[
@@ -332,7 +364,7 @@ pub const EXTERNAL_CHARACTERS: [CharacterInfo; 26] = [
         ],
     },
     CharacterInfo {
-        id: 25,
+        id: Character::Ganondorf,
         name: "Ganondorf",
         short_name: "Ganon",
         colors: &[
