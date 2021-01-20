@@ -21,11 +21,15 @@ edition = "2018"
 strum = { version = "0.20", features = ["derive"] }
 thiserror = "1.0"
 anyhow = "1.0"
-enet = { version = "0.2", optional = true }
+ubjson = { path = "../ubjson" }
+#enet = { version = "0.2", optional = true }
+byteorder = "1.4"
 
 [features]
 default = []
-console = ["enet"]
+#console = ["enet"]
+
+console = []
 
 [dev-dependencies]
 criterion = "0.3"
